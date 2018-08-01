@@ -1,6 +1,7 @@
 package app.com.practiceapplication.viewmodel;
 
 import android.databinding.ObservableField;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.util.Log;
 import app.com.practiceapplication.adapters.NewsAdapter;
 import app.com.practiceapplication.model.Result;
@@ -11,9 +12,11 @@ public class MainViewModel {
   public ObservableField<String> exception;
   private Subscriber<Result> subscriber;
   private NewsAdapter newsAdapter;
+  CountingIdlingResource countingIdlingResource;
 
-  public MainViewModel(NewsAdapter newsAdapter) {
+  public MainViewModel(NewsAdapter newsAdapter,CountingIdlingResource countingIdlingResource) {
     this.newsAdapter = newsAdapter;
+    this.countingIdlingResource = countingIdlingResource;
 
     initData();
     getNews();
@@ -23,20 +26,26 @@ public class MainViewModel {
     subscriber = new Subscriber<Result>() {
       @Override
       public void onCompleted() {
-        Log.d("[MainViewModel]", "onCompleted");
+        Log.d("@Test_logs", "onCompleted");
+        countingIdlingResource.decrement();
+
       }
 
       @Override
       public void onError(Throwable e) {
-
+        countingIdlingResource.decrement();
         exception.set(e.getMessage());
       }
 
       @Override
       public void onNext(Result resultModel) {
+        Log.d("@Test_logs", "onNext()");
         newsAdapter.addItem(resultModel);
       }
+
     };
+    Log.d("@Test_logs", "getNews()");
+    countingIdlingResource.increment();
     RetrofitHelper.getInstance().getNews(subscriber);
   }
 

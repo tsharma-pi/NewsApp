@@ -51,6 +51,7 @@ public class RetrofitHelper {
 
   public void getNews(Subscriber<Result> subscriber) {
     newsService.getNews().map(new Func1<NewsResponseModel<List<Result>>, List<Result>>() {
+
       @Override
       public List<Result> call(NewsResponseModel<List<Result>> listNewsResponseModel) {
         return listNewsResponseModel.getResults();

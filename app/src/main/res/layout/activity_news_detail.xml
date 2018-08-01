@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/screen_margin"
+                android:id="@+id/webView"
                 app:loadUrl="@{viewModel.url}"
                 app:setWebViewClient="@{viewModel.webViewClient}"></WebView>
 

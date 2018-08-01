@@ -1,10 +1,15 @@
 package app.com.practiceapplication;
 
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,14 +21,26 @@ import static junit.framework.Assert.assertFalse;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class HelloWorldEspressoTest {
+public class NewsListEspressoTest {
+    private IdlingResource mIdlingResource;
 
     @Rule
-    public ActivityTestRule<NewsActivity> mActivityRule =
+    public ActivityTestRule<NewsActivity> mActivityTestRule =
             new ActivityTestRule<>(NewsActivity.class);
+    private NewsActivity mActivity;
 
+    @Before
+    public void Setup(){
+        //get idling resource for authentication
+        mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
+
+        //get current activity
+        mActivity = mActivityTestRule.getActivity();
+        Espresso.registerIdlingResources(mIdlingResource);
+
+    }
     @Test
-    public void listGoesOverTheFold() {
+    public void checkList() {
         if(getRVcount() > 0){
             onView(withId(R.id.newsRecylerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         }else{
@@ -32,7 +49,15 @@ public class HelloWorldEspressoTest {
     }
 
     private int getRVcount(){
-        RecyclerView recyclerView =  mActivityRule.getActivity().findViewById(R.id.newsRecylerView);
+        RecyclerView recyclerView =  mActivityTestRule.getActivity().findViewById(R.id.newsRecylerView);
         return recyclerView.getAdapter().getItemCount();
+    }
+
+
+    @After
+    public void unregisterIdlingResource() {
+        if (mIdlingResource != null) {
+            Espresso.unregisterIdlingResources(mIdlingResource);
+        }
     }
 }

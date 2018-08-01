@@ -1,19 +1,13 @@
 package app.com.practiceapplication.viewmodel;
 
 import android.databinding.BaseObservable;
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-
-import app.com.practiceapplication.model.NewsResponseModel;
-import app.com.practiceapplication.model.ResultModel;
+import app.com.practiceapplication.model.Result;
 
 public class NewsViewModel extends BaseObservable {
 
-  ResultModel resultModel;
+  Result resultModel;
 
-    public NewsViewModel(ResultModel resultModel) {
+    public NewsViewModel(Result resultModel) {
         this.resultModel = resultModel;
     }
 

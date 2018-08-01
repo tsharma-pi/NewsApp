@@ -124,14 +124,13 @@ class Medium {
 }
 
 
-public class NewsResponseModel {
+public class NewsResponseModel<T> {
 
     private String status;
     private String copyright;
     private Integer numResults;
-    private List<ResultModel> resultModels = null;
+    private List<Result> results = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
 
     public String getStatus() {
         return status;
@@ -157,12 +156,12 @@ public class NewsResponseModel {
         this.numResults = numResults;
     }
 
-    public List<ResultModel> getResultModels() {
-        return resultModels;
+    public List<Result> getResults() {
+        return results;
     }
 
-    public void setResultModels(List<ResultModel> resultModels) {
-        this.resultModels = resultModels;
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 
     public Map<String, Object> getAdditionalProperties() {
@@ -172,6 +171,7 @@ public class NewsResponseModel {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
 
 }
 

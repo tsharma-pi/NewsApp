@@ -10,6 +10,12 @@ import app.com.practiceapplication.viewmodel.NewsDetailViewModel;
 public class NewsDetailActivity extends AppCompatActivity {
 
   ActivityNewsDetailBinding activityNewsDetailBinding;
+  String url;
+
+  public static NewsDetailActivity getInstance() {
+    return new NewsDetailActivity();
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -17,9 +23,12 @@ public class NewsDetailActivity extends AppCompatActivity {
     activityNewsDetailBinding = DataBindingUtil.setContentView(this,R.layout.activity_news_detail);
 
     Intent intent = getIntent();
-    String url = intent.getStringExtra(getString(R.string.url));
+    url = intent.getStringExtra(getString(R.string.url));
 
     activityNewsDetailBinding.setViewModel(new NewsDetailViewModel(url));
   }
 
+  public String getUrl() {
+    return url;
+  }
 }

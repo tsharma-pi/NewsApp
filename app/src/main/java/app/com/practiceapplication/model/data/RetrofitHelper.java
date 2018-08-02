@@ -50,6 +50,7 @@ public class RetrofitHelper {
   }
 
   public void getNews(Subscriber<Result> subscriber) {
+    //parsing response to NewsReponse class
     newsService.getNews().map(new Func1<NewsResponseModel<List<Result>>, List<Result>>() {
 
       @Override

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import app.com.practiceapplication.NewsDetailActivity;
 import app.com.practiceapplication.R;
 import app.com.practiceapplication.databinding.NewsItemBinding;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 /**
- * Created by Taruna on 2019/5/19.
+ * Created by Taruna on 2018/08/01.
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BindingHolder> {
 
@@ -43,10 +44,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BindingHolder>
         holder.itemBinding.setViewModel(newsViewModel);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
+              //sending url to be shown in NewsDetailActivity
                 String url = resultModels.get(position).getUrl();
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                intent.putExtra(context.getString(R.string.url),url);
-                context.startActivity(intent);
+                if(url!=null) {
+                  Intent intent = new Intent(context, NewsDetailActivity.class);
+                  intent.putExtra(context.getString(R.string.url), url);
+                  context.startActivity(intent);
+                }else Toast.makeText(context, R.string.no_content_for_this_news,Toast.LENGTH_SHORT).show();
             }
         });
     }

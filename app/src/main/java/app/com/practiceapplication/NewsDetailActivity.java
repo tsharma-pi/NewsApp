@@ -20,12 +20,12 @@ public class NewsDetailActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    activityNewsDetailBinding = DataBindingUtil.setContentView(this,R.layout.activity_news_detail);
+    activityNewsDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_detail);
 
     Intent intent = getIntent();
     url = intent.getStringExtra(getString(R.string.url));
 
-    activityNewsDetailBinding.setViewModel(new NewsDetailViewModel(url));
+    if (url != null) activityNewsDetailBinding.setViewModel(new NewsDetailViewModel(url));
   }
 
   public String getUrl() {

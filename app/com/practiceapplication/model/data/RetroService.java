@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * Created by Taruna on 2018/5/19.
+ * Created by Taruna on 2018/08/01.
  */
 public interface RetroService {
     String BASE_URL = "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/";

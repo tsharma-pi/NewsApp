@@ -18,7 +18,7 @@ import app.com.practiceapplication.viewmodel.NewsViewModel;
 
 
 /**
- * Created by Taruna on 2019/08/01.
+ * Created by Taruna on 2018/08/01.
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BindingHolder> {
 

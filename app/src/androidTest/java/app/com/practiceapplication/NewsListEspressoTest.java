@@ -27,8 +27,9 @@ import static junit.framework.Assert.assertFalse;
       new ActivityTestRule<NewsActivity>(NewsActivity.class){
         @Override protected void beforeActivityLaunched() {
           //super.beforeActivityLaunched();
-          Log.d("@Test_logs", "ActivityTestRule");
+
           mIdlingResource = NewsActivity.getIdlingResourceForAuthActivity();
+          Log.d("@Test_logs", "ActivityTestRule"+ mIdlingResource.isIdleNow());
           Espresso.registerIdlingResources(mIdlingResource);
         }
       };
@@ -44,9 +45,8 @@ import static junit.framework.Assert.assertFalse;
   }
 
   @Test public void checkList() {
-    Log.d("@Test_logs", "checkList");
-    //Espresso.registerIdlingResources(mIdlingResource);
-
+    Log.d("@Test_logs", "checkList"+ mIdlingResource.isIdleNow());
+    Log.d("@Test_logs", "checkList"+ mIdlingResource.isIdleNow());
     if (getRVcount() > 0) {
       onView(withId(R.id.newsRecylerView)).perform(
           RecyclerViewActions.actionOnItemAtPosition(0, click()));
@@ -62,6 +62,7 @@ import static junit.framework.Assert.assertFalse;
   }
 
   @After public void unregisterIdlingResource() {
+    Log.d("@Test_logs", "unregisterIdlingResource");
     if (mIdlingResource != null) {
       Espresso.unregisterIdlingResources(mIdlingResource);
     }

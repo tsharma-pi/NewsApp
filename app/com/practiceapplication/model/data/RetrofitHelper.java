@@ -17,7 +17,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Taruna on 2018/5/19.
+ * Created by Taruna on 2018/08/01.
  */
 public class RetrofitHelper {
     private static final int DEFAULT_TIMEOUT = 10;

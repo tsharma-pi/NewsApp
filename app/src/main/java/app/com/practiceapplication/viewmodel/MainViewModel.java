@@ -26,7 +26,7 @@ public class MainViewModel {
     subscriber = new Subscriber<Result>() {
       @Override
       public void onCompleted() {
-        Log.d("@Test_logs", "onCompleted");
+        Log.d("@Test_logs", "onCompleted"+ countingIdlingResource.isIdleNow());
         countingIdlingResource.decrement();
 
       }
@@ -39,13 +39,14 @@ public class MainViewModel {
 
       @Override
       public void onNext(Result resultModel) {
-        Log.d("@Test_logs", "onNext()");
+        Log.d("@Test_logs", "onNext()"+ countingIdlingResource.isIdleNow());
         newsAdapter.addItem(resultModel);
       }
 
     };
-    Log.d("@Test_logs", "getNews()");
+    Log.d("@Test_logs", "getNews()"+ countingIdlingResource.isIdleNow());
     countingIdlingResource.increment();
+    //calling API to get News
     RetrofitHelper.getInstance().getNews(subscriber);
   }
 
